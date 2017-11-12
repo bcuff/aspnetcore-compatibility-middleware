@@ -10,6 +10,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>aspnetcore middleware httpcontext</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>bcuff</Authors>
+    <Company>bcuff</Company>
   </PropertyGroup>
 
   <ItemGroup>
