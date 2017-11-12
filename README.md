@@ -59,3 +59,34 @@ void ExampleMethod()
 
 In new code you can inject an IHttpContextAccessor if you register one. AspNetCoreCompatibility provides an implementation that you can use when you have a mix of old and new code.
 
+### Threading Model
+
+The new ASP .NET Core doesn't set up a custom
+[SynchronizationContext](https://msdn.microsoft.com/en-us/library/system.threading.synchronizationcontext(v=vs.110).aspx)
+whereas the old ASP .NET did. The old context prevented more than one thread
+from executing at a time. This package re-enables that behavior and also
+makes it possible to access the HttpContext via thread local storage.
+
+Beware that in the Old ASP .NET this sort of thing would cause a deadlock:
+```csharp
+public class SampleController : Controller
+{
+    public ActionResult Index()
+    {
+        var task = DoSomethingAsync();
+        return View(task.Result); // deadlock!
+    }
+
+    private async Task<SomeModel> DoSomethingAsync()
+    {
+        return new SomeModel
+        {
+            Value = await GetSomethingAsync()
+        };
+    }
+}
+```
+This deadlocks because the synchronization context won't let multiple
+threads run code for this request at the same time. This is important
+to guarantee that things like HttpContext.Items (which is not a
+thread-safe structure) aren't corrupted.
