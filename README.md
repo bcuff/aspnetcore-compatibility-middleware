@@ -7,6 +7,33 @@ Package is hosted on nuget [here](https://www.nuget.org/packages/AspNetCoreCompa
 dotnet add package AspNetCoreCompatibility
 ```
 
+### Setup
+Add the following to your Startup.cs file.
+```csharp
+using AspNetCoreCompatibility;
+
+// In Startup.cs
+
+public class Startup
+{
+    public void Configure(IApplicationBuilder app)
+    {
+        // Enables the compatibility middleware.
+        // Middleware registered before this will not run in compatibility mode
+        // and won't have access to HttpContextAccessor.Current.
+        app.UseAspNetCompatibility();
+        // ...
+    }
+    
+    public void ConfigureServices(IServiceCollection services)
+    {
+        // Optional
+        // Allows access to HttpContext via IHttpContextAccessor
+        services.AddSingleton(new HttpContextAccessor());
+    }
+}
+```
+
 ### Usage
 Old code using this:
 ```csharp
@@ -32,29 +59,3 @@ void ExampleMethod()
 
 In new code you can inject an IHttpContextAccessor if you register one. AspNetCoreCompatibility provides an implementation that you can use when you have a mix of old and new code.
 
-### Setup
-
-```csharp
-using AspNetCoreCompatibility;
-
-// In Startup.cs
-
-public class Startup
-{
-    public void Configure(IApplicationBuilder app)
-    {
-        // Enables the compatibility middleware.
-        // Middleware registered before this will not run in compatibility mode
-        // and won't have access to HttpContextAccessor.Current.
-        app.UseAspNetCompatibility();
-        // ...
-    }
-    
-    public void ConfigureServices(IServiceCollection services)
-    {
-        // Optional
-        // Allows access to HttpContext via IHttpContextAccessor
-        services.AddSingleton(new HttpContextAccessor());
-    }
-}
-```
