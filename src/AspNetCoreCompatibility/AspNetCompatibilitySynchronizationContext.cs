@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace AspNetCoreCompatibility
 {
@@ -78,7 +79,7 @@ namespace AspNetCoreCompatibility
             }
             if (!scheduled)
             {
-                ThreadPool.QueueUserWorkItem(o => ExecuteOrSchedule(operation));
+                Task.Run(() => ExecuteOrSchedule(operation));
             }
         }
     }
