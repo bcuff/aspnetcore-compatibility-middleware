@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AspNetCoreCompatibility
 {
-    public sealed class HttpContextAccessor : IHttpContextAccessor
+    public sealed class CompatibilityHttpContextAccessor : IHttpContextAccessor
     {
         [ThreadStatic]
         static HttpContext _current;
@@ -18,7 +18,7 @@ namespace AspNetCoreCompatibility
         public HttpContext HttpContext
         {
             get => _current;
-            set => throw new InvalidOperationException("Setting the context is only allowed by the middleware");
+            set { } // middleware does this
         }
 
         internal static IDisposable OpenScope(HttpContext httpContext)

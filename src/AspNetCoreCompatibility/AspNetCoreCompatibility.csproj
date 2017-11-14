@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
-    <Description>Provides access to HttpContext via HttpContextAccessor.Current. Enables older ASP .NET concurrency model. This package is useful for applications that have been ported from ASP .NET to ASP .NET Core and depend on the old behavior of ASP .NET.</Description>
+    <Description>Provides access to HttpContext via CompatibilityHttpContextAccessor.Current. Enables older ASP .NET concurrency model. This package is useful for applications that have been ported from ASP .NET to ASP .NET Core and depend on the old behavior of ASP .NET.</Description>
     <Copyright>2017</Copyright>
     <PackageLicenseUrl>https://github.com/bcuff/aspnetcore-compatibility-middleware/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/bcuff/aspnetcore-compatibility-middleware</PackageProjectUrl>
@@ -12,6 +12,7 @@
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Authors>bcuff</Authors>
     <Company>bcuff</Company>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

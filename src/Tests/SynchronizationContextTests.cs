@@ -18,11 +18,11 @@ namespace Tests
 
             async Task Execute()
             {
-                Assert.AreSame(target, HttpContextAccessor.Current);
+                Assert.AreSame(target, CompatibilityHttpContextAccessor.Current);
                 await Task.Yield();
-                Assert.AreSame(target, HttpContextAccessor.Current);
+                Assert.AreSame(target, CompatibilityHttpContextAccessor.Current);
                 await Task.Delay(1);
-                Assert.AreSame(target, HttpContextAccessor.Current);
+                Assert.AreSame(target, CompatibilityHttpContextAccessor.Current);
             }
 
             new AspNetCompatibilitySynchronizationContext(target)

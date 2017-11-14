@@ -34,7 +34,7 @@ namespace AspNetCoreCompatibility
             }
             // begin - only one thread at a time should run here
             using (new SynchronizationContextScope(this))
-            using (HttpContextAccessor.OpenScope(_httpContext))
+            using (CompatibilityHttpContextAccessor.OpenScope(_httpContext))
             {
                 while (true)
                 {
