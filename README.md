@@ -29,7 +29,7 @@ public class Startup
     {
         // Optional
         // Allows access to HttpContext via IHttpContextAccessor
-        services.AddSingleton(new HttpContextAccessor());
+        services.AddSingleton(new CompatibilityHttpContextAccessor());
     }
 }
 ```
@@ -52,7 +52,7 @@ using AspNetCoreCompatibility;
 
 void ExampleMethod()
 {
-    var context = HttpContextAccessor.Current;
+    var context = CompatibilityHttpContextAccessor.Current;
     // ...
 }
 ```
